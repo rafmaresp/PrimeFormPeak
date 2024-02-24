@@ -1,0 +1,81 @@
+{
+  "name": "prime-form-peak",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "prime-form-peak",
+  "sourceRoot": "apps/prime-form-peak/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/prime-form-peak",
+        "index": "apps/prime-form-peak/src/index.html",
+        "browser": "apps/prime-form-peak/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/prime-form-peak/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/prime-form-peak/src/favicon.ico",
+          "apps/prime-form-peak/src/assets"
+        ],
+        "styles": ["apps/prime-form-peak/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/prime-form-peak/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/prime-form-peak/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "prime-form-peak:build:production"
+        },
+        "development": {
+          "buildTarget": "prime-form-peak:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "prime-form-peak:build"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "prime-form-peak:build",
+        "staticFilePath": "dist/apps/prime-form-peak/browser"
+      }
+    }
+  }
+}
